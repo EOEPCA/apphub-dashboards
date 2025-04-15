@@ -1,0 +1,221 @@
+profiles:
+- config_maps: []
+  default_url: null
+  definition:
+    default: false
+    description: This profile is used to demonstrate the use of an init script
+    display_name: Coder demo init script
+    kubespawner_override:
+      cpu_guarantee: 1
+      cpu_limit: 2
+      extra_resource_guarantees: {}
+      extra_resource_limits: {}
+      image: eoepca/pde-code-server:develop
+      mem_guarantee: 4G
+      mem_limit: 6G
+    slug: profile_1
+  env_from_config_maps: []
+  env_from_secrets: []
+  groups:
+  - group-a
+  - group-b
+  id: profile_1
+  image_pull_secrets: []
+  init_containers: []
+  manifests: []
+  node_selector: {}
+  pod_env_vars:
+    CODE_SERVER_WS: /workspace/mastering-app-package
+    CONDARC: /workspace/.condarc
+    CONDA_ENVS_PATH: /workspace/.envs
+    HOME: /workspace
+    XDG_RUNTIME_DIR: /workspace/.local
+  role_bindings: null
+  secret_mounts: []
+  volumes:
+  - access_modes:
+    - ReadWriteOnce
+    claim_name: workspace-claim
+    name: workspace-volume
+    persist: true
+    size: 10Gi
+    storage_class: standard
+    volume_mount:
+      mount_path: /workspace
+      name: workspace-volume
+- config_maps: []
+  default_url: null
+  definition:
+    default: false
+    description: This profile is used to demonstrate the use of an init script
+    display_name: Dash demo init script
+    kubespawner_override:
+      cpu_guarantee: 1
+      cpu_limit: 2
+      extra_resource_guarantees: {}
+      extra_resource_limits: {}
+      image: ttl.sh/dash-app:53885e62a1a89866a7c73e6d0a70fb80eb9b9ababc5684e6252886ef8e5751d3
+      mem_guarantee: 4G
+      mem_limit: 6G
+    slug: profile_dash
+  env_from_config_maps: []
+  env_from_secrets: []
+  groups:
+  - group-a
+  - group-b
+  id: profile_dash
+  image_pull_secrets: []
+  init_containers: []
+  manifests: []
+  node_selector: {}
+  pod_env_vars:
+    CODE_SERVER_WS: /workspace/mastering-app-package
+    CONDARC: /workspace/.condarc
+    CONDA_ENVS_PATH: /workspace/.envs
+    HOME: /workspace
+    XDG_RUNTIME_DIR: /workspace/.local
+  role_bindings: null
+  secret_mounts: []
+  volumes:
+  - access_modes:
+    - ReadWriteOnce
+    claim_name: workspace-claim
+    name: workspace-volume
+    persist: true
+    size: 10Gi
+    storage_class: standard
+    volume_mount:
+      mount_path: /workspace
+      name: workspace-volume
+- config_maps: []
+  default_url: null
+  definition:
+    default: false
+    description: This profile is used to demonstrate a Streamlit dashboard
+    display_name: Streamlit demo init script
+    kubespawner_override:
+      cpu_guarantee: 1
+      cpu_limit: 2
+      extra_resource_guarantees: {}
+      extra_resource_limits: {}
+      image: ttl.sh/streamlit-app:14823f852cb683672a5085353cb07c9a2b31daa023497de3e43429e88dc2e67d
+      mem_guarantee: 4G
+      mem_limit: 6G
+    slug: profile_streamlit
+  env_from_config_maps: []
+  env_from_secrets: []
+  groups:
+  - group-a
+  - group-b
+  id: profile_streamlit
+  image_pull_secrets: []
+  init_containers: []
+  manifests: []
+  node_selector: {}
+  pod_env_vars:
+    CODE_SERVER_WS: /workspace/mastering-app-package
+    CONDARC: /workspace/.condarc
+    CONDA_ENVS_PATH: /workspace/.envs
+    HOME: /workspace
+    XDG_RUNTIME_DIR: /workspace/.local
+  role_bindings: null
+  secret_mounts: []
+  volumes:
+  - access_modes:
+    - ReadWriteOnce
+    claim_name: workspace-claim
+    name: workspace-volume
+    persist: true
+    size: 10Gi
+    storage_class: standard
+    volume_mount:
+      mount_path: /workspace
+      name: workspace-volume
+- config_maps: []
+  default_url: null
+  definition:
+    default: false
+    description: This profile is used to demonstrate a Reflex dashboard
+    display_name: Reflex demo init script
+    kubespawner_override:
+      cpu_guarantee: 1
+      cpu_limit: 2
+      extra_resource_guarantees: {}
+      extra_resource_limits: {}
+      image: ttl.sh/reflex-app:4b7b00c30f2e5ba741e6e4dd4a52f0fbce95958fca6d39777c19dc8d39d2b4a8
+      mem_guarantee: 4G
+      mem_limit: 6G
+    slug: profile_reflex
+  env_from_config_maps: []
+  env_from_secrets: []
+  groups:
+  - group-a
+  - group-b
+  id: profile_reflex
+  image_pull_secrets: []
+  init_containers: []
+  manifests: []
+  node_selector: {}
+  pod_env_vars:
+    CODE_SERVER_WS: /workspace/mastering-app-package
+    CONDARC: /workspace/.condarc
+    CONDA_ENVS_PATH: /workspace/.envs
+    HOME: /workspace
+    XDG_RUNTIME_DIR: /workspace/.local
+  role_bindings: null
+  secret_mounts: []
+  volumes:
+  - access_modes:
+    - ReadWriteOnce
+    claim_name: workspace-claim
+    name: workspace-volume
+    persist: true
+    size: 10Gi
+    storage_class: standard
+    volume_mount:
+      mount_path: /workspace
+      name: workspace-volume
+- config_maps: []
+  default_url: null
+  definition:
+    default: false
+    description: This profile is used to demonstrate a Nicegui dashboard
+    display_name: Nicegui demo init script
+    kubespawner_override:
+      cpu_guarantee: 1
+      cpu_limit: 2
+      extra_resource_guarantees: {}
+      extra_resource_limits: {}
+      image: ttl.sh/nicegui-app:602eb6fb314b5fafad376a32ab55194e535e533dec6552f82b70d7ac0e554b1c
+      mem_guarantee: 4G
+      mem_limit: 6G
+    slug: profile_nicegui
+  env_from_config_maps: []
+  env_from_secrets: []
+  groups:
+  - group-a
+  - group-b
+  id: profile_nicegui
+  image_pull_secrets: []
+  init_containers: []
+  manifests: []
+  node_selector: {}
+  pod_env_vars:
+    CODE_SERVER_WS: /workspace/mastering-app-package
+    CONDARC: /workspace/.condarc
+    CONDA_ENVS_PATH: /workspace/.envs
+    HOME: /workspace
+    XDG_RUNTIME_DIR: /workspace/.local
+  role_bindings: null
+  secret_mounts: []
+  volumes:
+  - access_modes:
+    - ReadWriteOnce
+    claim_name: workspace-claim
+    name: workspace-volume
+    persist: true
+    size: 10Gi
+    storage_class: standard
+    volume_mount:
+      mount_path: /workspace
+      name: workspace-volume
