@@ -32,5 +32,4 @@ echo "Using internal port $destport"
 
 echo "Running entrypoint.sh with port $port"
 
-jhsingle-native-proxy --destport $destport --authtype none --port $port python main.py {-}P $destport {-}H 0.0.0.0 {--}no-reloader
-
+jhsingle-native-proxy --destport $destport --authtype none --port $port taipy run {--}port $destport main.py 

@@ -1,6 +1,7 @@
 from taipy.gui import Gui
 import taipy.gui.builder as tgb
 from math import cos, exp
+import os
 
 value = 10
 
@@ -20,4 +21,4 @@ with tgb.Page() as page:
 
 data = compute_data(value)
 
-Gui(page=page).run()
+Gui(page=page).run(base_url=os.environ.get("JUPYTERHUB_SERVICE_PREFIX"))

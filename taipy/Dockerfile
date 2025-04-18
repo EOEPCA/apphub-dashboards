@@ -22,8 +22,6 @@ RUN python -m pip install -r requirements.txt
 # Install your application
 COPY . .
 
-# Start up command
-#ENTRYPOINT [ "python", "main.py", "-P", "5000", "-H", "0.0.0.0", "--no-reloader" ]
 COPY --chown=taipy:taipy entrypoint.sh workspaces
 
 RUN chmod +x /workspaces/entrypoint.sh
