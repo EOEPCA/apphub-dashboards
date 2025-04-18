@@ -30,8 +30,9 @@ destport=$((port + 1))
 
 echo "Using internal port $destport"
 # env 
-# cd /app
-# reflex export --frontend-only --no-zip && mv .web/_static/* /srv/ && rm -rf .web
+cd /app
+reflex init
+reflex export --frontend-only --no-zip && mv .web/_static/* /srv/ && rm -rf .web
 # mv .web/_static/* /srv/ && rm -rf .web
 # cd -
 export PORT=$destport
