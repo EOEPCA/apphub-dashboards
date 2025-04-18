@@ -26,6 +26,7 @@ dash_image = os.environ.get("DASH_IMAGE")
 reflex_image = os.environ.get("REFLEX_IMAGE")
 streamlit_image = os.environ.get("STREAMLIT_IMAGE")
 nicegui_image = os.environ.get("NICEGUI_IMAGE")
+taipy_image = os.environ.get("TAIPY_IMAGE")
 
 # volumes
 workspace_volume = Volume(
@@ -179,6 +180,41 @@ profile_nicegui = Profile(
     image_pull_secrets=[],
 )
 
+profile_taipy = Profile(
+    id=f"profile_taipy",
+    groups=["group-a", "group-b"],
+    definition=ProfileDefinition(
+        display_name="Taipy demo init script",
+        description="This profile is used to demonstrate a Taipy dashboard",
+        slug="profile_taipy",
+        default=False,
+        kubespawner_override=KubespawnerOverride(
+            cpu_guarantee=1,
+            cpu_limit=2,
+            mem_guarantee="4G",
+            mem_limit="6G",
+            image=taipy_image,
+        ),
+    ),
+    node_selector=node_selector,
+    volumes=[workspace_volume],
+    config_maps=[
+    ],
+    pod_env_vars={
+        "HOME": "/workspace",
+        "CONDA_ENVS_PATH": "/workspace/.envs",
+        "CONDARC": "/workspace/.condarc",
+        "XDG_RUNTIME_DIR": "/workspace/.local",
+        "CODE_SERVER_WS": "/workspace/mastering-app-package",
+    },
+    init_containers=[],
+    manifests=[],
+    env_from_config_maps=[],
+    env_from_secrets=[],
+    secret_mounts=[],
+    image_pull_secrets=[],
+)
+
 profile_1 = Profile(
     id=f"profile_1",
     groups=["group-a", "group-b"],
@@ -219,6 +255,7 @@ profiles.append(profile_dash)
 profiles.append(profile_streamlit)
 profiles.append(profile_reflex)
 profiles.append(profile_nicegui)
+profiles.append(profile_taipy)
 
 config = Config(profiles=profiles)
 config_file_path = str(Path(current_dir).parent / 'files' / 'hub' / 'config.yml')

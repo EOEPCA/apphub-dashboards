@@ -186,7 +186,7 @@ profiles:
       cpu_limit: 2
       extra_resource_guarantees: {}
       extra_resource_limits: {}
-      image: ttl.sh/nicegui-app:602eb6fb314b5fafad376a32ab55194e535e533dec6552f82b70d7ac0e554b1c
+      image: ttl.sh/nicegui-app:a3e66be0a84a712dab72131df87a009fe313af3fafbcb75bf62395142fd88c8d
       mem_guarantee: 4G
       mem_limit: 6G
     slug: profile_nicegui
@@ -196,6 +196,50 @@ profiles:
   - group-a
   - group-b
   id: profile_nicegui
+  image_pull_secrets: []
+  init_containers: []
+  manifests: []
+  node_selector: {}
+  pod_env_vars:
+    CODE_SERVER_WS: /workspace/mastering-app-package
+    CONDARC: /workspace/.condarc
+    CONDA_ENVS_PATH: /workspace/.envs
+    HOME: /workspace
+    XDG_RUNTIME_DIR: /workspace/.local
+  role_bindings: null
+  secret_mounts: []
+  volumes:
+  - access_modes:
+    - ReadWriteOnce
+    claim_name: workspace-claim
+    name: workspace-volume
+    persist: true
+    size: 10Gi
+    storage_class: standard
+    volume_mount:
+      mount_path: /workspace
+      name: workspace-volume
+- config_maps: []
+  default_url: null
+  definition:
+    default: false
+    description: This profile is used to demonstrate a Taipy dashboard
+    display_name: Taipy demo init script
+    kubespawner_override:
+      cpu_guarantee: 1
+      cpu_limit: 2
+      extra_resource_guarantees: {}
+      extra_resource_limits: {}
+      image: ttl.sh/taipy-app:e447ef119a91416c3f90a07d6408e7c1b86facaac2e7780868c5543c34695c3a
+      mem_guarantee: 4G
+      mem_limit: 6G
+    slug: profile_taipy
+  env_from_config_maps: []
+  env_from_secrets: []
+  groups:
+  - group-a
+  - group-b
+  id: profile_taipy
   image_pull_secrets: []
   init_containers: []
   manifests: []

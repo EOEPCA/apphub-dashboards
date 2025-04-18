@@ -28,6 +28,12 @@ build:
       docker:
         dockerfile: Dockerfile
       context: nicegui  
+
+    - image: ttl.sh/taipy-app
+      docker:
+        dockerfile: Dockerfile
+      context: taipy
+
 deploy:
   helm:
     releases:
