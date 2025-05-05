@@ -27,6 +27,7 @@ reflex_image = os.environ.get("REFLEX_IMAGE")
 streamlit_image = os.environ.get("STREAMLIT_IMAGE")
 nicegui_image = os.environ.get("NICEGUI_IMAGE")
 taipy_image = os.environ.get("TAIPY_IMAGE")
+panel_image = os.environ.get("PANEL_IMAGE")
 
 # volumes
 workspace_volume = Volume(
@@ -44,8 +45,8 @@ profile_dash = Profile(
     id=f"profile_dash",
     groups=["group-a", "group-b"],
     definition=ProfileDefinition(
-        display_name="Dash demo init script",
-        description="This profile is used to demonstrate the use of an init script",
+        display_name="Dash - work in progress",
+        description="This profile is used to demonstrate a Dash Plotty dashboard (https://dash.plotly.com/)",
         slug="profile_dash",
         default=False,
         kubespawner_override=KubespawnerOverride(
@@ -79,8 +80,8 @@ profile_streamlit = Profile(
     id=f"profile_streamlit",
     groups=["group-a", "group-b"],
     definition=ProfileDefinition(
-        display_name="Streamlit demo init script",
-        description="This profile is used to demonstrate a Streamlit dashboard",
+        display_name="Streamlit",
+        description="This profile is used to demonstrate a Streamlit dashboard (https://streamlit.io/)",
         slug="profile_streamlit",
         default=False,
         kubespawner_override=KubespawnerOverride(
@@ -114,8 +115,8 @@ profile_reflex = Profile(
     id=f"profile_reflex",
     groups=["group-a", "group-b"],
     definition=ProfileDefinition(
-        display_name="Reflex demo init script",
-        description="This profile is used to demonstrate a Reflex dashboard",
+        display_name="Reflex",
+        description="This profile is used to demonstrate a Reflex dashboard (https://reflex.dev/)",
         slug="profile_reflex",
         default=False,
         kubespawner_override=KubespawnerOverride(
@@ -149,8 +150,8 @@ profile_nicegui = Profile(
     id=f"profile_nicegui",
     groups=["group-a", "group-b"],
     definition=ProfileDefinition(
-        display_name="Nicegui demo init script",
-        description="This profile is used to demonstrate a Nicegui dashboard",
+        display_name="Nicegui - work in Progress",
+        description="This profile is used to demonstrate a Nicegui dashboard (https://nicegui.io/)",
         slug="profile_nicegui",
         default=False,
         kubespawner_override=KubespawnerOverride(
@@ -184,8 +185,8 @@ profile_taipy = Profile(
     id=f"profile_taipy",
     groups=["group-a", "group-b"],
     definition=ProfileDefinition(
-        display_name="Taipy demo init script",
-        description="This profile is used to demonstrate a Taipy dashboard",
+        display_name="Taipy",
+        description="This profile is used to demonstrate a Taipy dashboard (https://taipy.io/)",
         slug="profile_taipy",
         default=False,
         kubespawner_override=KubespawnerOverride(
@@ -194,6 +195,41 @@ profile_taipy = Profile(
             mem_guarantee="4G",
             mem_limit="6G",
             image=taipy_image,
+        ),
+    ),
+    node_selector=node_selector,
+    volumes=[workspace_volume],
+    config_maps=[
+    ],
+    pod_env_vars={
+        "HOME": "/workspace",
+        "CONDA_ENVS_PATH": "/workspace/.envs",
+        "CONDARC": "/workspace/.condarc",
+        "XDG_RUNTIME_DIR": "/workspace/.local",
+        "CODE_SERVER_WS": "/workspace/mastering-app-package",
+    },
+    init_containers=[],
+    manifests=[],
+    env_from_config_maps=[],
+    env_from_secrets=[],
+    secret_mounts=[],
+    image_pull_secrets=[],
+)
+
+profile_panel = Profile(
+    id=f"profile_panel",
+    groups=["group-a", "group-b"],
+    definition=ProfileDefinition(
+        display_name="Panel",
+        description="This profile is used to demonstrate a Panel dashboard (https://panel.holoviz.org/)",
+        slug="profile_panel",
+        default=False,
+        kubespawner_override=KubespawnerOverride(
+            cpu_guarantee=1,
+            cpu_limit=2,
+            mem_guarantee="4G",
+            mem_limit="6G",
+            image=panel_image,
         ),
     ),
     node_selector=node_selector,
@@ -250,12 +286,16 @@ profile_1 = Profile(
     image_pull_secrets=[],
 )
 
+
+
+
 profiles.append(profile_1)
 profiles.append(profile_dash)
 profiles.append(profile_streamlit)
 profiles.append(profile_reflex)
 profiles.append(profile_nicegui)
 profiles.append(profile_taipy)
+profiles.append(profile_panel)
 
 config = Config(profiles=profiles)
 config_file_path = str(Path(current_dir).parent / 'files' / 'hub' / 'config.yml')

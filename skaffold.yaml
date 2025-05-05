@@ -34,6 +34,11 @@ build:
         dockerfile: Dockerfile
       context: taipy
 
+    - image: ttl.sh/panel-app
+      docker:
+        dockerfile: Dockerfile
+      context: panel
+
 deploy:
   helm:
     releases:
@@ -71,4 +76,4 @@ portForward:
   resourceName: application-hub-proxy-public
   namespace: jupyter 
   port: 80
-  localPort: 80
+  localPort: 8080

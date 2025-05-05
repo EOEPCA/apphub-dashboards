@@ -1,0 +1,4 @@
+panel
+pandas
+hvplot
+jhsingle-native-proxy>=0.0.9
