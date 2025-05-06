@@ -1,4 +1,13 @@
 panel
-pandas
 hvplot
+scipy
 jhsingle-native-proxy>=0.0.9
+pandas>=2.0.3
+pyarrow>=14.0.1
+planetary-computer
+geopandas
+adlfs
+fsspec
+pyarrow
+pystac
+loguru
