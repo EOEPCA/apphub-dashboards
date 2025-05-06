@@ -1,2 +1,4 @@
 taipy
 jhsingle-native-proxy>=0.0.9
+pystac-client
+planetary-computer

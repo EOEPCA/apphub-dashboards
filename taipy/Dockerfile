@@ -1,5 +1,5 @@
 # Your Python version
-FROM python:3.9 as taipy
+FROM python:3.9 AS taipy
 
 # Web port of the application
 EXPOSE 5000

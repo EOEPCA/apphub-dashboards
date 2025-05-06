@@ -32,4 +32,10 @@ echo "Using internal port $destport"
 
 echo "Running entrypoint.sh with port $port"
 
-jhsingle-native-proxy --destport $destport --authtype none --port $port taipy run {--}port $destport main.py 
+# enable local development mode
+if [ -z "$JUPYTERHUB_SERVICE_PREFIX" ]; then
+    echo "JUPYTERHUB_SERVICE_PREFIX is not set, using default /"
+    JUPYTERHUB_SERVICE_PREFIX="/"
+fi
+
+jhsingle-native-proxy --destport $destport --authtype none --port $port taipy run {--}port $destport app.py 
