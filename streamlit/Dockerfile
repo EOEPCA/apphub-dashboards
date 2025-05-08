@@ -4,7 +4,9 @@ RUN pip3 install \
     jhsingle-native-proxy>=0.0.9 \
     streamlit \
     pandas \
-    numpy
+    numpy \
+    pystac-client \
+    planetary-computer
 
 # create a user, since we don't want to run as root
 RUN useradd -m jovyan
