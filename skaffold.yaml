@@ -38,7 +38,12 @@ build:
       docker:
         dockerfile: Dockerfile
       context: panel
-
+      
+    - image: ttl.sh/solara-app
+      docker:
+        dockerfile: Dockerfile
+      context: solara
+      
 deploy:
   helm:
     releases:

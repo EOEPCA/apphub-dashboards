@@ -28,6 +28,7 @@ streamlit_image = os.environ.get("STREAMLIT_IMAGE")
 nicegui_image = os.environ.get("NICEGUI_IMAGE")
 taipy_image = os.environ.get("TAIPY_IMAGE")
 panel_image = os.environ.get("PANEL_IMAGE")
+solara_image = os.environ.get("SOLARA_IMAGE")
 
 # volumes
 workspace_volume = Volume(
@@ -251,6 +252,41 @@ profile_panel = Profile(
     image_pull_secrets=[],
 )
 
+profile_solara = Profile(
+    id=f"profile_solara",
+    groups=["group-a", "group-b"],
+    definition=ProfileDefinition(
+        display_name="Solara",
+        description="This profile is used to demonstrate a Solara dashboard (https://solara.dev/)",
+        slug="profile_solara",
+        default=False,
+        kubespawner_override=KubespawnerOverride(
+            cpu_guarantee=1,
+            cpu_limit=2,
+            mem_guarantee="4G",
+            mem_limit="6G",
+            image=solara_image,
+        ),
+    ),
+    node_selector=node_selector,
+    volumes=[workspace_volume],
+    config_maps=[
+    ],
+    pod_env_vars={
+        "HOME": "/workspace",
+        "CONDA_ENVS_PATH": "/workspace/.envs",
+        "CONDARC": "/workspace/.condarc",
+        "XDG_RUNTIME_DIR": "/workspace/.local",
+        "CODE_SERVER_WS": "/workspace/mastering-app-package",
+    },
+    init_containers=[],
+    manifests=[],
+    env_from_config_maps=[],
+    env_from_secrets=[],
+    secret_mounts=[],
+    image_pull_secrets=[],
+)
+
 profile_1 = Profile(
     id=f"profile_1",
     groups=["group-a", "group-b"],
@@ -296,6 +332,7 @@ profiles.append(profile_reflex)
 profiles.append(profile_nicegui)
 profiles.append(profile_taipy)
 profiles.append(profile_panel)
+profiles.append(profile_solara)
 
 config = Config(profiles=profiles)
 config_file_path = str(Path(current_dir).parent / 'files' / 'hub' / 'config.yml')
