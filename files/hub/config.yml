@@ -50,7 +50,7 @@ profiles:
       cpu_limit: 2
       extra_resource_guarantees: {}
       extra_resource_limits: {}
-      image: ttl.sh/streamlit-app:544f7874bdfdfd4b65371e280bf63a7a72fc0918591ac9907e13b713a51e709f
+      image: ttl.sh/streamlit-app:f9f0a122d7eaf9224c7ee44902d5207415706f42ef5565ab81db994b76eb6117
       mem_guarantee: 1G
       mem_limit: 2G
     slug: profile_streamlit
@@ -90,7 +90,7 @@ profiles:
       cpu_limit: 2
       extra_resource_guarantees: {}
       extra_resource_limits: {}
-      image: ttl.sh/taipy-app:623213503c0c18b8348376024126c313021c562afd4f3da577e9b816bac2be2e
+      image: ttl.sh/taipy-app:4f22931f31b6ca9b0a932a54c5b872ef3fccde2db4bedb92435873d5448c42a6
       mem_guarantee: 1G
       mem_limit: 2G
     slug: profile_taipy

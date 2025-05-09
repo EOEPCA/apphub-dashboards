@@ -38,4 +38,4 @@ if [ -z "$JUPYTERHUB_SERVICE_PREFIX" ]; then
     JUPYTERHUB_SERVICE_PREFIX="/"
 fi
 
-jhsingle-native-proxy --destport $destport --authtype none --port $port taipy run {--}port $destport app.py 
+jhsingle-native-proxy --destport $destport --authtype none --port $port taipy run {--}port $destport dashboard.py 
