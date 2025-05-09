@@ -1,12 +1,9 @@
-FROM python:3.11-slim
+FROM python:3.12-slim
 
-RUN pip3 install \
-    jhsingle-native-proxy>=0.0.9 \
-    streamlit \
-    pandas \
-    numpy \
-    pystac-client \
-    planetary-computer
+COPY requirements.txt /tmp/requirements.txt
+
+RUN python3 -m pip install --upgrade pip && \
+    pip3 install -r /tmp/requirements.txt
 
 # create a user, since we don't want to run as root
 RUN useradd -m jovyan
@@ -25,6 +22,4 @@ EXPOSE 8888
 
 ENTRYPOINT ["/workspaces/entrypoint.sh"]
 
-STOPSIGNAL SIGKILL
 
-# CMD ["jhsingle-native-proxy", "--destport", "8505", "streamlit", "run" "/workspaces/dashboard/app.py", "{--}server.port", "{port}", "{--}server.headless", "True", "{--}server.enableCORS", "False", "--port", "8888"]

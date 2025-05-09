@@ -32,4 +32,4 @@ echo "Using internal port $destport"
 
 echo "Running entrypoint.sh with port $port"
 
-jhsingle-native-proxy --destport $destport --authtype none streamlit run /workspaces/dashboard/app.py {--}server.port {port} {--}server.headless True {--}server.enableCORS False --port $port
+jhsingle-native-proxy --destport $destport --authtype none streamlit run /workspaces/dashboard/app.py {--}server.port ${destport} {--}server.headless True {--}server.enableCORS False --port $port

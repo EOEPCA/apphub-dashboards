@@ -34,7 +34,7 @@ def get_latest_items(collection_id):
 
 # Layout
 st.set_page_config(page_title="Sentinel Feed Dashboard", layout="wide")
-st.title("🛰️ Live Sentinel Feed Dashboard")
+st.title("Streamlit Live Sentinel Feed Dashboard")
 
 col1, col2 = st.columns(2)
 

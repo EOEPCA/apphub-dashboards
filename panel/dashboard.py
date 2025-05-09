@@ -69,7 +69,7 @@ logger.info("Creating layout")
 content = pn.FlexBox(s2a_list, s1_list)
 
 pn.template.FastListTemplate(
-    title="Live Sentinel Feed Dashboard",
+    title="Panel - Live Sentinel Feed Dashboard",
     main=[content],
     accent=ACCENT,
     theme="dark",

@@ -47,7 +47,7 @@ update_data()
 
 # Build dashboard page with Builder API
 with tgb.Page() as page:
-    tgb.text("# Live Sentinel Feed Dashboard", mode="md")
+    tgb.text("# Taipy - Live Sentinel Feed Dashboard", mode="md")
     with tgb.layout(columns="1 1", gap="30px"):
         tgb.text("{s2a_md}", mode="md")
         tgb.text("{s1_md}", mode="md")
@@ -64,6 +64,6 @@ threading.Thread(target=run_with_refresh, daemon=True).start()
 # Start the GUI
 Gui(page=page).run(
     base_url=os.environ.get("JUPYTERHUB_SERVICE_PREFIX"),
-    title="Sentinel Feed Dashboard",
+    title="Taipy Sentinel Feed Dashboard",
     dark_mode=True
 )

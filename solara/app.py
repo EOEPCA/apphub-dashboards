@@ -70,7 +70,7 @@ def Page():
     AutoRefresh()
 
     with solara.Column():
-        solara.Title("🛰️ Sentinel Feed Dashboard")
+        solara.Title("Solara Sentinel Feed Dashboard")
 
         with solara.Columns([1, 1]):
             with solara.Card("Sentinel-2 L2A (Latest 10)"):
