@@ -30,4 +30,11 @@ destport=$((port + 1))
 
 echo "Using internal port $destport"
 
-jhsingle-native-proxy --destport $destport --authtype none python /workspaces/dashboard/app.py {--}port {port} --port $port
+# enable local development mode
+if [ -z "$JUPYTERHUB_SERVICE_PREFIX" ]; then
+    echo "JUPYTERHUB_SERVICE_PREFIX is not set, using default /"
+    JUPYTERHUB_SERVICE_PREFIX="/"
+fi
+
+
+jhsingle-native-proxy --destport $destport --authtype none solara run app.py {--}port ${destport} {--}host=0.0.0.0 {--}root-path $JUPYTERHUB_SERVICE_PREFIX --port $port

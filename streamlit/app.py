@@ -1,19 +1,80 @@
 import streamlit as st
-import pandas as pd
-import numpy as np
+import pystac_client
+import planetary_computer
+import datetime
+import time
+import logging
 
-st.write("Streamlit supports a wide range of data visualizations, including [Plotly, Altair, and Bokeh charts](https://docs.streamlit.io/develop/api-reference/charts). 📊 And with over 20 input widgets, you can easily make your data interactive!")
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger("streamlit_app")
 
-all_users = ["Alice", "Bob", "Charly"]
-with st.container(border=True):
-    users = st.multiselect("Users", all_users, default=all_users)
-    rolling_average = st.toggle("Rolling average")
+# STAC client (signed)
+catalog = pystac_client.Client.open(
+    "https://planetarycomputer.microsoft.com/api/stac/v1",
+    modifier=planetary_computer.sign_inplace,
+)
 
-np.random.seed(42)
-data = pd.DataFrame(np.random.randn(20, len(users)), columns=users)
-if rolling_average:
-    data = data.rolling(7).mean().dropna()
+# Fetch latest items from a collection
+def get_latest_items(collection_id):
+    logger.info(f"Fetching items for {collection_id}")
+    search = catalog.search(
+        collections=[collection_id],
+        sortby=[{"field": "datetime", "direction": "desc"}],
+        limit=10,
+        max_items=10,
+    )
+    return [
+        {
+            "id": item.id,
+            "datetime": item.datetime.strftime("%Y-%m-%d %H:%M"),
+        }
+        for item in search.items()
+    ]
 
-tab1, tab2 = st.tabs(["Chart", "Dataframe"])
-tab1.line_chart(data, height=250)
-tab2.dataframe(data, height=250, use_container_width=True)
+# Layout
+st.set_page_config(page_title="Sentinel Feed Dashboard", layout="wide")
+st.title("Streamlit Live Sentinel Feed Dashboard")
+
+col1, col2 = st.columns(2)
+
+# Sentinel-2 L2A
+with col1:
+    st.subheader("Sentinel-2 L2A (Latest 10)")
+    for item in get_latest_items("sentinel-2-l2a"):
+        st.markdown(
+            f"""
+            <div style="padding: 0.5em; border-left: 4px solid #0d9488; background: #f0fdfa; margin-bottom: 0.5em;">
+                <div style="font-weight: bold; color: #0f766e;">🛰️ {item['id']}</div>
+                <div style="font-size: 0.9em; color: #334155;">📅 {item['datetime']}</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+# Sentinel-1 GRD
+with col2:
+    st.subheader("Sentinel-1 GRD (Latest 10)")
+    for item in get_latest_items("sentinel-1-grd"):
+        st.markdown(
+            f"""
+            <div style="padding: 0.5em; border-left: 4px solid #3b82f6; background: #eff6ff; margin-bottom: 0.5em;">
+                <div style="font-weight: bold; color: #1e40af;">🛰️ {item['id']}</div>
+                <div style="font-size: 0.9em; color: #334155;">📅 {item['datetime']}</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+# Auto-refresh
+st.markdown("---")
+col_left, col_right = st.columns([3, 1])
+with col_left:
+    st.info("This page refreshes every 15 seconds. Click below to force an update.")
+with col_right:
+    if st.button("🔄 Refresh Now"):
+        st.rerun()
+
+# Delay + rerun (auto-refresh)
+time.sleep(15)
+st.rerun()

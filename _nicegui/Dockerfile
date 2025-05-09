@@ -8,4 +8,9 @@ RUN pip3 install -r /app/requirements.txt
 
 COPY entrypoint.sh /app
 RUN chmod +x /app/entrypoint.sh
+
+RUN useradd -m jovyan -u 1001 -g 0
+
+RUN chown -R jovyan:0 /app
+
 ENTRYPOINT ["/app/entrypoint.sh"]

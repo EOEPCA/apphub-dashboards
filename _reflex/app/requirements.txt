@@ -1,4 +1,4 @@
-taipy
 jhsingle-native-proxy>=0.0.9
+reflex==0.7.6
 pystac-client
 planetary-computer

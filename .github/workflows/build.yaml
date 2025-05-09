@@ -39,7 +39,7 @@ jobs:
 
     strategy:
       matrix:
-        step: [streamlit, reflex, nicegui, dash]
+        step: [streamlit, panel, solara, taipy]
 
     steps:
     - uses: actions/checkout@v2

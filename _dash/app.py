@@ -1,10 +1,12 @@
 from dash import Dash, html, dcc, callback, Output, Input
 import plotly.express as px
 import pandas as pd
+import os 
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminder_unfiltered.csv')
 
-app = Dash()
+#app = Dash(url_base_pathname=os.environ.get('JUPYTERHUB_SERVICE_PREFIX'))
+app = Dash(requests_pathname_prefix=os.environ.get('JUPYTERHUB_SERVICE_PREFIX'))
 
 # Requires Dash 2.17.0 or later
 app.layout = [

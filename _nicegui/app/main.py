@@ -2,7 +2,9 @@ import os
 
 from nicegui import app, ui
 
-app.root_path = os.getenv("JUPYTERHUB_SERVICE_PREFIX")
+app.root_path = os.getenv("JUPYTERHUB_SERVICE_PREFIX").rstrip('/')
+
+
 @ui.page('/')
 def index():
     ui.textarea('This note is kept between visits') \
@@ -14,4 +16,4 @@ def handle_shutdown():
 
 
 app.on_shutdown(handle_shutdown)
-ui.run(storage_secret=os.environ['STORAGE_SECRET'], port=int(os.environ['PORT']))
+ui.run(storage_secret=os.environ['STORAGE_SECRET'], port=int(os.environ['PORT']), host="0.0.0.0")

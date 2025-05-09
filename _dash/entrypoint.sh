@@ -30,6 +30,10 @@ destport=$((port + 1))
 
 echo "Using internal port $destport"
 
-echo "Running entrypoint.sh with port $port"
+# enable local development mode
+if [ -z "$JUPYTERHUB_SERVICE_PREFIX" ]; then
+    echo "JUPYTERHUB_SERVICE_PREFIX is not set, using default /"
+    JUPYTERHUB_SERVICE_PREFIX="/"
+fi
 
-jhsingle-native-proxy --destport $destport --authtype none streamlit run /workspaces/dashboard/app.py {--}server.port ${destport} {--}server.headless True {--}server.enableCORS False --port $port
+jhsingle-native-proxy --destport $destport --authtype none python /workspaces/dashboard/app.py {--}port ${destport} --port $port

@@ -1,0 +1,4 @@
+solara
+pystac-client
+planetary-computer
+jhsingle-native-proxy>=0.0.9

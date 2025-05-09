@@ -32,9 +32,11 @@ echo "Using internal port $destport"
 
 echo "Running entrypoint.sh with port $port"
 
-#panel", "serve", "/code/app.py", "--address", "0.0.0.0", "--port", "7860",  "--allow-websocket-origin", "*", "--num-procs", "2", "--num-threads", "0", "--index", "app"
+# enable local development mode
+if [ -z "$JUPYTERHUB_SERVICE_PREFIX" ]; then
+    echo "JUPYTERHUB_SERVICE_PREFIX is not set, using default /"
+    JUPYTERHUB_SERVICE_PREFIX="/"
+fi
 
-env
-
-jhsingle-native-proxy --destport $destport --authtype none panel serve /code/app.py {--}address 0.0.0.0 {--}allow-websocket-origin='*' {--}root-path $JUPYTERHUB_SERVICE_PREFIX {--}port $destport {--}num-procs 1 {--}num-threads 0 {--}index app {--}session-token-expiration=900000 --port $port
+jhsingle-native-proxy --destport $destport --authtype none panel serve /code/dashboard.py {--}log-level info {--}address 0.0.0.0 {--}allow-websocket-origin='*' {--}root-path $JUPYTERHUB_SERVICE_PREFIX {--}port $destport {--}num-procs 1 {--}num-threads 0 {--}session-token-expiration=900000 --port $port
 
