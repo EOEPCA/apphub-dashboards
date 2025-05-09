@@ -65,6 +65,4 @@ profile_solara = Profile(
 
 ## References:
 
-See https://panel.holoviz.org/tutorials/basic/deploy.html
-
-And https://panel.holoviz.org/tutorials/intermediate/serve.html
+See https://solara.dev/documentation
