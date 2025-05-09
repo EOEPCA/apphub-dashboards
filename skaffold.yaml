@@ -9,25 +9,11 @@ build:
       template: 5m
 
   artifacts:
-    - image: ttl.sh/dash-app
-      docker:
-        dockerfile: Dockerfile
-      context: dash
   
     - image: ttl.sh/streamlit-app
       docker:
         dockerfile: Dockerfile
       context: streamlit
-
-    - image: ttl.sh/reflex-app
-      docker:
-        dockerfile: Dockerfile
-      context: reflex/app
-
-    - image: ttl.sh/nicegui-app
-      docker:
-        dockerfile: Dockerfile
-      context: nicegui  
 
     - image: ttl.sh/taipy-app
       docker:
