@@ -3,7 +3,7 @@ import yaml
 from pathlib import Path
 import os
 
-storage_class_rwo = "standard"
+storage_class_rwo = os.environ.get("STORAGE_CLASS", "standard")
 workspace_volume_size = "10Gi"
 
 node_selector = {}

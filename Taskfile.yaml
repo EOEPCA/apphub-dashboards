@@ -1,0 +1,30 @@
+version: '3'
+
+tasks:
+
+  dev:
+    desc: 'Runs skaffold dev with profile ghcr'
+    cmds:
+      - |
+        set -x
+        export STORAGE_CLASS="standard"
+        sh -c config/generate-config-ghcr.sh
+        skaffold dev --profile ghcr
+    silent: false
+
+  run:
+    desc: 'Runs skaffold dev with profile ghcr'
+    cmds:
+      - |
+        set -x
+        export STORAGE_CLASS="standard"
+        sh -c config/generate-config-ghcr.sh
+        skaffold run --profile ghcr
+    silent: false
+
+  port-forward:
+    desc: 'Runs skaffold port-forward'
+    cmds:
+      - |
+        echo "Open the browser at http://localhost:8080"
+        kubectl port-forward svc/application-hub-proxy-public 8080:80 -n jupyter

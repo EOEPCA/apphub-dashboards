@@ -62,6 +62,27 @@ manifests:
   - sk-k8s/script.yaml
   - sk-k8s/job.yaml
 
+profiles:
+  - name: ghcr
+
+    patches:
+
+      - op: add
+        path: /build
+        value: {}
+
+      - op: add
+        path: /deploy/helm/releases/0/setValues/jupyterhub.hub.db.pvc.storageClassName
+        value:  standard
+
+      - op: add
+        path: /deploy/helm/releases/0/setValues/jupyterhub.hub.extraEnv.STORAGE_CLASS
+        value: standard
+
+      - op: add
+        path: /deploy/helm/hooks
+        value: {}
+
 portForward:
 - resourceType: service
   resourceName: application-hub-proxy-public
